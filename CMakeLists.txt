@@ -18,6 +18,28 @@ project(StatePatternLibrary LANGUAGES CXX)
 
 set(CMAKE_BUILD_TYPE Release)
 
+# Find SFML
+## If you want to link SFML statically
+#set(SFML_STATIC_LIBRARIES TRUE)
+set(SFML_STATIC_LIBRARIES FALSE)
+set(SFML_FIND_PATH ${CMAKE_PREFIX_PATH})
+set(SFML_INCLUDE_PATH "${SFML_FIND_PATH}/include")
+find_package(SFML 2.5 REQUIRED system window graphics audio)
+
+# Find Box2D
+set(BOX2D_FIND_PATH ${CMAKE_PREFIX_PATH})
+set(BOX2D_INCLUDE_PATH "${BOX2D_FIND_PATH}/include")
+find_package(box2d REQUIRED)
+
+# Headers
+set(PROJECT_INCLUDE_DIRS)
+set(PROJECT_INCLUDE_DIRS ${PROJECT_INCLUDE_DIRS} ./Headers/)
+include_directories(${PROJECT_INCLUDE_DIRS})
+
+# Preprocessor defines
+set(DEFINES)
+add_compile_definitions(${DEFINES})
+
 # Sources
 set(PROJECT_HEADERS)
 file(GLOB_RECURSE PROJECT_HEADERS RELATIVE ${PROJECT_SOURCE_DIR} *.h *.hpp)
@@ -27,35 +49,15 @@ file(GLOB_RECURSE PROJECT_SOURCES RELATIVE ${PROJECT_SOURCE_DIR} *.c *.cpp)
 # Create a library file
 add_library(StatePattern STATIC ${PROJECT_SOURCES} ${PROJECT_HEADERS})
 
-# Headers
-set(PROJECT_INCLUDE_DIRS)
-set(PROJECT_INCLUDE_DIRS ${PROJECT_INCLUDE_DIRS} ./Headers/)
-#set(PROJECT_INCLUDE_DIRS ${PROJECT_INCLUDE_DIRS} $(BOX2D_INCLUDE))
-set(PROJECT_INCLUDE_DIRS ${PROJECT_INCLUDE_DIRS} C:/Libraries/Box2D/include)
-#set(PROJECT_INCLUDE_DIRS ${PROJECT_INCLUDE_DIRS} $(SFML_INCLUDE))
-set(PROJECT_INCLUDE_DIRS ${PROJECT_INCLUDE_DIRS} D:/OneDrive-Erojasfredini/OneDrive/Documentos/Libs/SFML/SFML-2.4.2/include)
-include_directories(${PROJECT_INCLUDE_DIRS})
-
-# Preprocessor defines
-set(DEFINES)
-add_compile_definitions(${DEFINES})
-
-# Libraries Dirs
-#set(PROJECT_LINK_DIRS)
-#set(PROJECT_LINK_DIRS ${PROJECT_LINK_DIRS} "C:/Libraries/Box2D/lib/$<CONFIG>$")
-#set(PROJECT_LINK_DIRS ${PROJECT_LINK_DIRS} "C:/Libraries/SFML/lib/$<CONFIG>$")
-#link_directories(${PROJECT_LINK_DIRS})
-
 # Libraries
-#set(PROJECT_LINK_LIBS)
-#set(PROJECT_LINK_LIBS "Box2D")
-#target_link_libraries(StatePattern ${PROJECT_LINK_LIBS})
+set(PROJECT_LINK_LIBS)
+set(PROJECT_LINK_LIBS "sfml-main" "sfml-system" "sfml-graphics" "sfml-window" "sfml-audio")
+
+target_link_libraries(StatePattern PRIVATE box2d::box2d ${PROJECT_LINK_LIBS})
 
 # Output folder
 set_target_properties(StatePattern PROPERTIES PDB_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Bin/)
 set_target_properties(StatePattern PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Bin/)# ARCHIVE_OUTPUT_DIRECTORY for static libs
-#set_target_properties(StatePattern PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin/)# LIBRARY_OUTPUT_DIRECTORY for dynamic libs
-#set_target_properties(StatePattern PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin/)
 
 # Set compiler to C++17
 set_property(TARGET StatePattern PROPERTY CXX_STANDARD 17)

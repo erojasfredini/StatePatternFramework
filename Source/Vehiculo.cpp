@@ -13,7 +13,7 @@ Vehiculo::Vehiculo(const b2BodyDef& CuerpoDef, const b2FixtureDef& AdornoDef, fl
 {
 	//Linkeado al Vehiculo
 	m_pCuerpo->SetUserData((void*)this);
-	m_pAdorno->SetUserData((void*)this);
+	//m_pAdorno->SetUserData((void*)this);
 }
 
 //-------------------------------------------------------------//
