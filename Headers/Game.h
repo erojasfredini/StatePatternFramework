@@ -34,7 +34,7 @@ public:
 	/////////////	 Game Metodos		 /////////////
 	//================================================
 
-	Game(sf::VideoMode ModoVideo, std::string TextoVentana, unsigned long EstiloVentana, sf::WindowSettings ConfiguracionVentana, int fps);
+	Game(sf::VideoMode ModoVideo, std::string TextoVentana, unsigned long EstiloVentana, sf::ContextSettings Contexto, int fps);
 
 	//Loop principal del juego
 	void Iniciar();
@@ -46,10 +46,10 @@ public:
 	void ProcesarEventos(const sf::Event& Evento);
 
 	//Actualiza la escena
-	virtual void Actualizar()=0;
+	virtual void Actualizar(const float dt)=0;
 
 	//Dibuja la escena
-	virtual void Dibujar()=0;
+	virtual void Dibujar(const float dt)=0;
 
 	//Carga los recursos a usar
 	virtual void LoadRecursos()=0;

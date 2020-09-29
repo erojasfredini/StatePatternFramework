@@ -16,7 +16,7 @@ public:
 
 	float m_VelocidadMax;
 
-	Vehiculo(const b2BodyDef& CuerpoDef, const b2FixtureDef& AdornoDef, float escala, sf::Image* pTextura);
+	Vehiculo(const b2BodyDef& CuerpoDef, const b2FixtureDef& AdornoDef, float escala, sf::Texture* pTextura);
 
 	//Actualiza la entidad
 	virtual void Actualizar(float dt);
@@ -28,5 +28,5 @@ public:
 	sf::Vector2f GetDireccion() const;
 
 	SteeringBehaviors& GetSteeringBehaviors();
-	
+
 };

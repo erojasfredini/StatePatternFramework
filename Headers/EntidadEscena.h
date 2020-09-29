@@ -22,8 +22,11 @@ class EntidadEscena: public EntidadBase
 //protected:
 public:
 
-	//Forma de SFML para mostrar el objeto
+	//Interfaz dibujable de SFML
 	sf::Drawable* m_pGrafico;
+
+	//Interfaz transformable de SFML
+	sf::Transformable* m_pTransformable;
 
 	//El cuerpo rigido del avatar
 	b2Body*    m_pCuerpo;
@@ -47,7 +50,7 @@ public:
 	//	-Un puntero a una image de SFML asociado con este cuerpo rigido
 	//	-Un puntero a el mundo de la simulacion de Box2D
 	//Nota: pTextura se setea en el sprite asi que debe mantenerse
-	EntidadEscena(const b2BodyDef& CuerpoDef, const b2FixtureDef& AdornoDef, float escala, sf::Image* pTextura);
+	EntidadEscena(const b2BodyDef& CuerpoDef, const b2FixtureDef& AdornoDef, float escala, sf::Texture* pTextura);
 
 	EntidadEscena(const b2BodyDef& CuerpoDef, const b2FixtureDef& AdornoDef, sf::Shape* pForma);
 

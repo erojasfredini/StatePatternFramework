@@ -37,7 +37,7 @@ EnrutadorMensajes* EnrutadorMensajes::Singleton()
 	return &instancia;
 }
 
-void EnrutadorMensajes::EnviarMensaje(int TipoMensaje, unsigned int IDDestinatario, unsigned int IDRemitente, 
+void EnrutadorMensajes::EnviarMensaje(int TipoMensaje, unsigned int IDDestinatario, unsigned int IDRemitente,
 	double retardo, double tiempoAplicacion, void* InformacionExtra)
 {
 	Mensaje msg(TipoMensaje, IDDestinatario, IDRemitente, tiempoAplicacion+retardo, InformacionExtra);

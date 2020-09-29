@@ -1,17 +1,17 @@
 #include "Game.h"
 
-b2World Game::m_World(b2Vec2(0,0),false);
+b2World Game::m_World(b2Vec2(0,0));
 
 //-------------------------------------------------------------//
 //-------------	Constructor/Destructor	-----------------------//
 //-------------------------------------------------------------//
 
-Game::Game(sf::VideoMode ModoVideo, std::string TextoVentana, unsigned long EstiloVentana, sf::WindowSettings ConfiguracionVentana, int fps): 
-				m_Window(ModoVideo, TextoVentana, EstiloVentana, ConfiguracionVentana),
-				m_dt(1.0f/fps)
+Game::Game(sf::VideoMode ModoVideo, std::string TextoVentana, unsigned long EstiloVentana, sf::ContextSettings Contexto, int fps) :
+	m_Window(ModoVideo, TextoVentana, EstiloVentana, Contexto),
+	m_dt(1.0f / (float)fps)
 {
-	m_Window.SetFramerateLimit(fps);
-	m_Window.Show(true);	
+	m_Window.setFramerateLimit(fps);
+	m_Window.setVisible(true);
 }
 
 //-------------------------------------------------------------//
@@ -24,32 +24,35 @@ void Game::Iniciar()
 	this->CrearEscena();//creamos la escena... en este caso solo consiste en posicionar el sprite de animacion en una posicion
 
 	sf::Event m_Evento;
+	sf::Clock clock;
 
-	while( m_Window.IsOpened() )
+	while( m_Window.isOpen() )
 	{
+		float dt = clock.getElapsedTime().asSeconds();
+		clock.restart();
+
 		//Atrapamos los eventos para cerra la ventana
-		while( m_Window.GetEvent(m_Evento) )
+		while( m_Window.pollEvent(m_Evento) )
 			this->ProcesarEventos(m_Evento);
 
-		this->Actualizar();    //Actualizamos la escena
+		this->Actualizar(dt);    //Actualizamos la escena
 
-		this->Dibujar();       //Dibujamos todo el juego
-
+		this->Dibujar(dt);       //Dibujamos todo el juego
 	}
 }
 
 void Game::ProcesarEventos(const sf::Event& Evento)
 {
-	switch( Evento.Type )
+	switch( Evento.type )
 	{
 	case sf::Event::Closed:
-			m_Window.Close();
+			m_Window.close();
 		break;
 
 	case sf::Event::KeyReleased:
 		{
-			if( Evento.Key.Code == sf::Key::Escape )
-				m_Window.Close();
+			if( Evento.key.code == sf::Keyboard::Escape )
+				m_Window.close();
 		}
 		break;
 	}

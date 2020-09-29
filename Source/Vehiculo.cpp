@@ -8,7 +8,7 @@
 //-------------	Constructor/Destructor	-----------------------//
 //-------------------------------------------------------------//
 
-Vehiculo::Vehiculo(const b2BodyDef& CuerpoDef, const b2FixtureDef& AdornoDef, float escala, sf::Image* pTextura): 
+Vehiculo::Vehiculo(const b2BodyDef& CuerpoDef, const b2FixtureDef& AdornoDef, float escala, sf::Texture* pTextura):
 					EntidadEscena(CuerpoDef, AdornoDef, escala, pTextura), m_Comportamiento(this)
 {
 	//Linkeado al Vehiculo
@@ -70,7 +70,7 @@ sf::Vector2f Vehiculo::GetDireccion() const
 {
 	b2Transform T = m_pCuerpo->GetTransform();
 	b2Vec2 adelante(1.0f, 0.0f);
-	adelante = b2Mul(T.R, adelante);//transformamos con la rotacion del mundo
+	adelante = b2Mul(T.q, adelante);//transformamos con la rotacion del mundo
 	adelante.Normalize();//no hace falta... pero quien me va a culpar por no tener fe ciega en las matematicas :P
 	return sf::Vector2f(adelante.x, adelante.y);
 }

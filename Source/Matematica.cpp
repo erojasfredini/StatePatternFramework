@@ -59,15 +59,17 @@ float RandUnitario()
 
 int Rand(int min, int max)
 {
-	return ( (rand()/(float)RAND_MAX)*(max-min)+min );
+	return (int)( (rand()/(float)RAND_MAX)*(max-min)+min );
 }
 
 b2Transform MundoALocal(const b2Vec2 &localI, const b2Vec2 &localJ, const b2Vec2 &localO)
 {
 	b2Transform WtoL;
-	WtoL.R.col1 = b2Vec2(localI.x, localJ.x);
-	WtoL.R.col2 = b2Vec2(localI.y, localJ.y);
-	WtoL.position = b2Vec2(-b2Dot(localI,localO), -b2Dot(localJ,localO));
+
+	b2Rot rot;
+	rot.s = localJ.x;
+	rot.c = localI.x;
+	WtoL.p = b2Vec2(-b2Dot(localI,localO), -b2Dot(localJ,localO));
 
 	return WtoL;
 }

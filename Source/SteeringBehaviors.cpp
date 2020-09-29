@@ -68,7 +68,7 @@ sf::Vector2f SteeringBehaviors::Arribar(const sf::Vector2f& PosObjetivo, Desacel
 	if( dist > 0.0f )//si todavia no estamos sobre el objetivo
 	{
 		//es necesaria para utilizar la desaceleracion
-		const float CoefDesaceleracion = 0.3;
+		const float CoefDesaceleracion = 0.3f;
 		//calculamos la velocidad para llegar al objetivo dada la desaceleracion que deseamos
 		float velocidad = dist / ((float)Tipo * CoefDesaceleracion);
 		//nos aseguramos que la velocidad no excede el limite del vehiculo
@@ -88,7 +88,7 @@ sf::Vector2f SteeringBehaviors::Interceptar(const Vehiculo& Acechado)
 	sf::Vector2f haciaAcechado = Acechado.GetPosicion() - m_pVehiculoDueño->GetPosicion();
 	float angDif = Dot(m_pVehiculoDueño->GetDireccion(), Acechado.GetDireccion());
 
-	angDif = (180/PI)*acos(angDif);
+	angDif = (180.0f/PI)*acos(angDif);
 	//Si estan mirandose de frente no predecimos sino que solo avanzamos hacia donde esta ahora
 	if( Dot(haciaAcechado, m_pVehiculoDueño->GetDireccion() ) > 0.0f &&
 		angDif > (180-TOLERANCIA_MIRANDOSE_GRADOS) &&
@@ -142,7 +142,7 @@ sf::Vector2f SteeringBehaviors::EvadirObstaculos(std::vector<EntidadEscena*> &Ob
 {
 	assert(&Obstaculos != NULL);
 
-	float largoRectanguloColision = m_EvadirObstaculosRectanguloMin + 
+	float largoRectanguloColision = m_EvadirObstaculosRectanguloMin +
 			(Norma(m_pVehiculoDueño->GetVelocidadLineal())/m_pVehiculoDueño->GetVelocidadMax()) * m_EvadirObstaculosRectanguloMin;
 
 	//Estas variables contendran el resultado de la colision mas cercana, si es que existe colision claro
@@ -218,7 +218,7 @@ sf::Vector2f SteeringBehaviors::EvadirObstaculos(std::vector<EntidadEscena*> &Ob
 		m_EvadirObstaculosPuntoObjetoColision = b2Vec2(99999.0f, 99999.0f);
 
 	if( pEntidadColisionCercana != NULL )
-		fuerza = b2Mul(m_pVehiculoDueño->GetTransformacion().R, fuerza);//devuelve la fuerza calculada
+		fuerza = b2Mul(m_pVehiculoDueño->GetTransformacion().q, fuerza);//devuelve la fuerza calculada
 	return sf::Vector2f(fuerza.x, fuerza.y);//devuelve vector 0
 }
 
@@ -305,7 +305,7 @@ sf::Vector2f SteeringBehaviors::Esconderse(const sf::Vector2f& PosPeligro, std::
 	//si no hay ninguna posicion de escondite escapamos del peligro
 	if( distMenor == std::numeric_limits<float>::max() )
 		return Escapar(PosPeligro);
-	
+
 	//nos dirigimos rapidamente al escondite
 	return Arribar(PosEsconditeMenor, Rapido);
 }
@@ -571,7 +571,7 @@ sf::Vector2f SteeringBehaviors::Sensores::GetDireccion() const
 {
 	sf::Vector2f dir = m_pCaster->GetDireccion();
 	b2Vec2 d(dir.x, dir.y);
-	b2Transform T(b2Vec2(0.0f, 0.0f), b2Mat22(m_Angulo));
+	b2Transform T(b2Vec2(0.0f, 0.0f), b2Rot(m_Angulo));
 	d = b2Mul(T, d);
 	return sf::Vector2f(d.x, d.y);
 }
