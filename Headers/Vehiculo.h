@@ -16,7 +16,7 @@ public:
 
 	float m_VelocidadMax;
 
-	Vehiculo(const b2BodyDef& CuerpoDef, const b2FixtureDef& AdornoDef, float escala, sf::Texture* pTextura);
+	Vehiculo(b2BodyDef& CuerpoDef, const b2FixtureDef& AdornoDef, float escala, sf::Texture* pTextura);
 
 	//Actualiza la entidad
 	virtual void Actualizar(float dt);

@@ -50,9 +50,9 @@ public:
 	//	-Un puntero a una image de SFML asociado con este cuerpo rigido
 	//	-Un puntero a el mundo de la simulacion de Box2D
 	//Nota: pTextura se setea en el sprite asi que debe mantenerse
-	EntidadEscena(const b2BodyDef& CuerpoDef, const b2FixtureDef& AdornoDef, float escala, sf::Texture* pTextura);
+	EntidadEscena(b2BodyDef& CuerpoDef, const b2FixtureDef& AdornoDef, float escala, sf::Texture* pTextura);
 
-	EntidadEscena(const b2BodyDef& CuerpoDef, const b2FixtureDef& AdornoDef, sf::Shape* pForma);
+	EntidadEscena(b2BodyDef& CuerpoDef, const b2FixtureDef& AdornoDef, sf::Shape* pForma);
 
 	~EntidadEscena();
 

@@ -8,12 +8,13 @@
 //-------------	Constructor/Destructor	-----------------------//
 //-------------------------------------------------------------//
 
-Vehiculo::Vehiculo(const b2BodyDef& CuerpoDef, const b2FixtureDef& AdornoDef, float escala, sf::Texture* pTextura):
+Vehiculo::Vehiculo(b2BodyDef& CuerpoDef, const b2FixtureDef& AdornoDef, float escala, sf::Texture* pTextura):
 					EntidadEscena(CuerpoDef, AdornoDef, escala, pTextura), m_Comportamiento(this)
 {
 	//Linkeado al Vehiculo
-	m_pCuerpo->SetUserData((void*)this);
-	//m_pAdorno->SetUserData((void*)this);
+	// El Link esta a la EntidadEscena
+	//m_pCuerpo->SetUserData((void*)this);
+	//m_pAdorno->SetUserData((void*)tdhis);
 }
 
 //-------------------------------------------------------------//

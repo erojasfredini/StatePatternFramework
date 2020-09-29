@@ -6,8 +6,12 @@
 //-------------	Constructor/Destructor	-----------------------//
 //-------------------------------------------------------------//
 
-EntidadEscena::EntidadEscena(const b2BodyDef& CuerpoDef, const b2FixtureDef& AdornoDef, float escala, sf::Texture* pTextura)
+EntidadEscena::EntidadEscena(b2BodyDef& CuerpoDef, const b2FixtureDef& AdornoDef, float escala, sf::Texture* pTextura)
 {
+	b2BodyUserData userData;
+	userData.pointer = (uintptr_t)this;
+	CuerpoDef.userData = userData;
+
 	m_pCuerpo = Game::m_World.CreateBody(&CuerpoDef);
 	m_pAdorno = m_pCuerpo->CreateFixture(&AdornoDef);
 
@@ -24,8 +28,12 @@ EntidadEscena::EntidadEscena(const b2BodyDef& CuerpoDef, const b2FixtureDef& Ado
 	m_BoundingCircleRadio = m_pAdorno->GetAABB(0).GetExtents().Length();
 }
 
-EntidadEscena::EntidadEscena(const b2BodyDef& CuerpoDef, const b2FixtureDef& AdornoDef, sf::Shape* pForma)
+EntidadEscena::EntidadEscena(b2BodyDef& CuerpoDef, const b2FixtureDef& AdornoDef, sf::Shape* pForma)
 {
+	b2BodyUserData userData;
+	userData.pointer = (uintptr_t)this;
+	CuerpoDef.userData = userData;
+
 	m_pCuerpo = Game::m_World.CreateBody(&CuerpoDef);
 	m_pAdorno = m_pCuerpo->CreateFixture(&AdornoDef);
 
