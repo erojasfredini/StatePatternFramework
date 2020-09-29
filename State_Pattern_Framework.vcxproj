@@ -42,16 +42,17 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IntDir>$(ProjectDir)bin\$(Configuration)\obj\</IntDir>
-    <IncludePath>$(SFML_INCLUDE);$(ProjectDir)\Headers\;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;</IncludePath>
-    <SourcePath>$(SFML_SOURCE);$(ProjectDir)\Source\;$(VCInstallDir)atlmfc\src\mfc;$(VCInstallDir)atlmfc\src\mfcm;$(VCInstallDir)atlmfc\src\atl;$(VCInstallDir)crt\src;</SourcePath>
-    <LibraryPath>$(SFML_LIB)\vc2010;C:\Program Files (x86)\Microsoft DirectX SDK (February 2010)\Lib\x86;C:\Program Files\MATLAB\R2010a\extern\lib\win32\microsoft;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(BOX2D_INCLUDE);$(SFML_INCLUDE);$(ProjectDir)\Headers\;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;</IncludePath>
+    <SourcePath>$(BOX2D_SOURCE);$(SFML_SOURCE);$(ProjectDir)\Source\;$(VCInstallDir)atlmfc\src\mfc;$(VCInstallDir)atlmfc\src\mfcm;$(VCInstallDir)atlmfc\src\atl;$(VCInstallDir)crt\src;</SourcePath>
+    <LibraryPath>$(BOX2D_LIB)\vc2010;$(SFML_LIB)\vc2010;C:\Program Files (x86)\Microsoft DirectX SDK (February 2010)\Lib\x86;C:\Program Files\MATLAB\R2010a\extern\lib\win32\microsoft;$(LibraryPath)</LibraryPath>
+    <TargetName>$(ProjectName)-d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SFML_INCLUDE);$(ProjectDir)\Headers\;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;</IncludePath>
-    <SourcePath>$(SFML_SOURCE);$(ProjectDir)\Source\;$(VCInstallDir)atlmfc\src\mfc;$(VCInstallDir)atlmfc\src\mfcm;$(VCInstallDir)atlmfc\src\atl;$(VCInstallDir)crt\src;</SourcePath>
+    <IncludePath>$(BOX2D_INCLUDE);$(SFML_INCLUDE);$(ProjectDir)\Headers\;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;</IncludePath>
+    <SourcePath>$(BOX2D_SOURCE);$(SFML_SOURCE);$(ProjectDir)\Source\;$(VCInstallDir)atlmfc\src\mfc;$(VCInstallDir)atlmfc\src\mfcm;$(VCInstallDir)atlmfc\src\atl;$(VCInstallDir)crt\src;</SourcePath>
     <OutDir>$(ProjectDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)bin\$(Configuration)\obj\</IntDir>
-    <LibraryPath>$(SFML_LIB)\vc2010;$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib</LibraryPath>
+    <LibraryPath>$(BOX2D_LIB)\vc2010;$(SFML_LIB)\vc2010;$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -86,19 +87,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Headers\EntidadEscena.h" />
+    <ClInclude Include="Headers\Game.h" />
     <ClInclude Include="Headers\ManagerEntidades.h" />
     <ClInclude Include="Headers\EnrutadorMensajes.h" />
     <ClInclude Include="Headers\EntidadBase.h" />
     <ClInclude Include="Headers\Estado.h" />
     <ClInclude Include="Headers\FSM.h" />
+    <ClInclude Include="Headers\Matematica.h" />
     <ClInclude Include="Headers\Mensaje.h" />
+    <ClInclude Include="Headers\SteeringBehaviors.h" />
+    <ClInclude Include="Headers\Vehiculo.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\EntidadEscena.cpp" />
+    <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\ManagerEntidades.cpp" />
     <ClCompile Include="Source\EnrutadorMensajes.cpp" />
     <ClCompile Include="Source\EntidadBase.cpp" />
     <ClCompile Include="Source\Estado.cpp" />
     <ClCompile Include="Source\FSM.cpp" />
+    <ClCompile Include="Source\Matematica.cpp" />
+    <ClCompile Include="Source\SteeringBehaviors.cpp" />
+    <ClCompile Include="Source\Vehiculo.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

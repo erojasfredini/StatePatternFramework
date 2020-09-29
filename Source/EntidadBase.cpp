@@ -6,7 +6,7 @@ unsigned int EntidadBase::m_ProximoIDValido = 0;
 //-------------	Constructor/Destructor	-----------------------//
 //-------------------------------------------------------------//
 
-EntidadBase::EntidadBase(int id, sf::Vector2f Posicion): m_Posicion(Posicion), m_MaquinaDeEstadoFinito(this)
+EntidadBase::EntidadBase(): m_MaquinaDeEstadoFinito(this)
 {
 	m_ID = EntidadBase::m_ProximoIDValido++;
 }
@@ -23,11 +23,11 @@ void EntidadBase::Actualizar(float dt)
 {
 	m_MaquinaDeEstadoFinito.Actualizar(dt);
 }
-
+/*
 sf::Vector2f EntidadBase::GetPosicion() const
 {
 	return m_Posicion;
-}
+}*/
 
 unsigned int EntidadBase::GetID() const
 {

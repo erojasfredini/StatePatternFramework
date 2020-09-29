@@ -19,20 +19,20 @@ class EntidadBase
 	protected:
 
 		//La posicion global de la entidad en la escena
-		sf::Vector2f m_Posicion;
+		//sf::Vector2f m_Posicion;
 
 		//La maquina de estado finito de la entidad
 		FSM m_MaquinaDeEstadoFinito;
 
 	public:
-		EntidadBase(int id, sf::Vector2f Posicion);
+		EntidadBase();
 
 		virtual ~EntidadBase();
 
-		//all entities must implement an update function
+		//Actualiza la entidad
 		virtual void Actualizar(float dt);
 
-		sf::Vector2f GetPosicion() const;
+		//sf::Vector2f GetPosicion() const;
 
 		unsigned int GetID() const;
 
